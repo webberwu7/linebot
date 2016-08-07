@@ -86,7 +86,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					bot.SendText([]string{content.From}, "!createchatroom\n"+"!joinchatroom\n"+"!leavechatroom")
 					bot.SendText([]string{content.From}, "!create\n"+"!join\n"+"!leave")
 				}
-				}
 			}else if S == "creating"{
 				var rn string
 				db.QueryRow("SELECT roomnum FROM database1234.chatroom WHERE roomnum = ?", text.Text).Scan(&rn)
