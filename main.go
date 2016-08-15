@@ -27,7 +27,6 @@ import (
 var bot *linebot.Client
 
 func main() {
-	_"github.com/go-sql-driver/mysql"
 	strID := os.Getenv("ChannelID")
 	numID, _ := strconv.ParseInt(strID, 10, 64) // string to integer
 	bot, _ = linebot.NewClient(numID, os.Getenv("ChannelSecret"), os.Getenv("MID"))
