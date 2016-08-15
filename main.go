@@ -21,12 +21,12 @@ import (
 	"strconv"
 	"github.com/line/line-bot-sdk-go/linebot"
 	"database/sql"
-	_"github.com/go-sql-driver/mysql"
 )
 
 var bot *linebot.Client
 
 func main() {
+	_"github.com/go-sql-driver/mysql"
 	strID := os.Getenv("ChannelID")
 	numID, _ := strconv.ParseInt(strID, 10, 64) // string to integer
 	bot, _ = linebot.NewClient(numID, os.Getenv("ChannelSecret"), os.Getenv("MID"))
@@ -49,7 +49,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		content := result.Content()
 		if content != nil { // put user profile into database
 			db,_ := sql.Open("mysql", os.Getenv("dbacc")+":"+os.Getenv("dbpass")+"@tcp("+os.Getenv("dbserver")+")/")
-			row,_ := db.Query("SELECT MID FROM database1234.linebotuser WHERE MID = ?", content.From)
+			row,_ := db.Query("SELECT MID FROM database1234.starysky_user WHERE MID = ?", content.From)
 			var M string
 			row.Next()
 			row.Scan(&M)
@@ -57,7 +57,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			prof,_ := bot.GetUserProfile([]string{content.From})
 			info := prof.Contacts
 			bot.SendText([]string{content.From}, "Welcome!")
-			db.Exec("INSERT INTO database1234.linebotuser VALUES (?, ?, ?, ?)", info[0].MID, info[0].DisplayName, info[0].PictureURL, "default")
+			db.Exec("INSERT INTO database1234.starysky_user ( MID, UserName, UserPicture) VALUES (?, ?, ?)", info[0].MID, info[0].DisplayName, info[0].PictureURL,)
 			db.Close()
 		}else{
 			db.Close()
@@ -85,6 +85,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					bot.SendText([]string{content.From}, "Hi,"+info[0].DisplayName+"!\n"+"These are my commands:")
 					bot.SendText([]string{content.From}, "!createchatroom\n"+"!joinchatroom\n"+"!leavechatroom")
 					bot.SendText([]string{content.From}, "!create\n"+"!join\n"+"!leave")
+					)
 				}
 			}else if S == "creating"{
 				var rn string
