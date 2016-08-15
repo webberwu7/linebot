@@ -49,7 +49,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		content := result.Content()
 		if content != nil { // put user profile into database
 			db,_ := sql.Open("mysql", os.Getenv("dbacc")+":"+os.Getenv("dbpass")+"@tcp("+os.Getenv("dbserver")+")/")
-			row,_ := db.Query("SELECT MID FROM database1234.starysky_user WHERE MID = ?", content.From)
+			row,_ := db.Query("SELECT MID FROM database1234.starrysky_user WHERE MID = ?", content.From)
 			var M string
 			row.Next()
 			row.Scan(&M)
@@ -57,7 +57,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			prof,_ := bot.GetUserProfile([]string{content.From})
 			info := prof.Contacts
 			bot.SendText([]string{content.From}, "Welcome!")
-			db.Exec("INSERT INTO database1234.starysky_user ( MID, UserName, UserPicture) VALUES (?, ?, ?)", info[0].MID, info[0].DisplayName, info[0].PictureURL,)
+			db.Exec("INSERT INTO database1234.starrysky_user ( MID, UserName, UserPicture) VALUES (?, ?, ?)", info[0].MID, info[0].DisplayName, info[0].PictureURL,)
 			db.Close()
 		}else{
 			db.Close()
