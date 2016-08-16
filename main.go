@@ -72,7 +72,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			db.Exec("INSERT INTO database1234.starrysky_text ( MID, text) VALUES (?, ?)", info[0].MID , text.Text)
 			var S string
 			db.QueryRow("SELECT UserStatus FROM database1234.starrysky_user WHERE MID = ?", content.From).Scan(&S) // get user status
-			if S == 10 {
+			if S == "10" {
 				if text.Text == "!joinchatroom" { // cheak if enter commands
 					db.Exec("UPDATE database1234.linebotuser SET Status = ? WHERE MID = ?", "joining", content.From)
 					bot.SendText([]string{content.From}, "Please enter chatroom number:")
