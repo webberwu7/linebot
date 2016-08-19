@@ -49,7 +49,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		content := result.Content()
 		if content != nil { // put user profile into database
 			db,_ := sql.Open("mysql", os.Getenv("dbacc")+":"+os.Getenv("dbpass")+"@tcp("+os.Getenv("dbserver")+")/")
-			row,_ := db.Query("SELECT MID FROM database1234.starrysky_user WHERE MID = ?", content.From)
+			row,_ := db.Query("SELECT MID FROM sql6131889.User WHERE MID = ?", content.From)
 			var M string
 			row.Next()
 			row.Scan(&M)
@@ -57,7 +57,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				prof,_ := bot.GetUserProfile([]string{content.From})
 				info := prof.Contacts
 				bot.SendText([]string{content.From}, "Welcome!")
-				db.Exec("INSERT INTO database1234.starrysky_user ( MID, UserName, UserPicture) VALUES (?, ?, ?)", info[0].MID, info[0].DisplayName, info[0].PictureURL,)
+				db.Exec("INSERT INTO sql6131889.User ( MID, UserName, UserPicture) VALUES (?, ?, ?)", info[0].MID, info[0].DisplayName, info[0].PictureURL,)
 				db.Close()
 			}else{
 				db.Close()
@@ -69,9 +69,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			info := prof.Contacts
 			bot.SendText([]string{os.Getenv("mymid")}, info[0].DisplayName+" :\n"+text.Text) // sent to garylai
 			db,_ := sql.Open("mysql", os.Getenv("dbacc")+":"+os.Getenv("dbpass")+"@tcp("+os.Getenv("dbserver")+")/")
-			db.Exec("INSERT INTO database1234.starrysky_text ( MID, text) VALUES (?, ?)", info[0].MID , text.Text)
+			db.Exec("INSERT INTO sql6131889.text ( MID, text) VALUES (?, ?)", info[0].MID , text.Text)
 			var S string
-			db.QueryRow("SELECT UserStatus FROM database1234.starrysky_user WHERE MID = ?", content.From).Scan(&S) // get user status
+			db.QueryRow("SELECT UserStatus FROM sql6131889.user WHERE MID = ?", content.From).Scan(&S) // get user status
 			if S == "10" {
 				if text.Text == "!joinchatroom" { // cheak if enter commands
 					db.Exec("UPDATE database1234.linebotuser SET Status = ? WHERE MID = ?", "joining", content.From)
