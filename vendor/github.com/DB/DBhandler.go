@@ -5,7 +5,7 @@
 
 */
 package DB
-func UserGamming(MID string) bool{
+func UserGamming(MID string) string{
 
-	return true
+	return "4321"
 }

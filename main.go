@@ -64,9 +64,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				db.Close()
 			}
 		}
-		if UserGamming{
-			bot.SendText([]string{content.From}, "Gamming!")
-		}
+		bot.SendText([]string{content.From}, "Gamming! "+UserGamming([]string{content.From} ))
 
 		/*
 		if content != nil && content.IsMessage && content.ContentType == linebot.ContentTypeText{ // content type : text
