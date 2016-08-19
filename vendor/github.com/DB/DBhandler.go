@@ -5,7 +5,7 @@
 
 */
 package DB
-func UserGamming(MID string) string{
+func UserGamming() string{
 
 	return "4321"
 }
