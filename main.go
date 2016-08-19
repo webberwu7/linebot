@@ -21,6 +21,7 @@ import (
 	"strconv"
 	"github.com/line/line-bot-sdk-go/linebot"
 	"database/sql"
+	"github.com/DB"
 	_"github.com/go-sql-driver/mysql"
 )
 
@@ -63,6 +64,11 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				db.Close()
 			}
 		}
+		if UserGamming{
+			bot.SendText([]string{content.From}, "Gamming!")
+		}
+
+		/*
 		if content != nil && content.IsMessage && content.ContentType == linebot.ContentTypeText{ // content type : text
 			text, _ := content.TextContent()
 			prof,_ := bot.GetUserProfile([]string{content.From})
@@ -162,6 +168,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			db,_ := sql.Open("mysql", os.Getenv("dbacc")+":"+os.Getenv("dbpass")+"@tcp("+os.Getenv("dbserver")+")/")
 			db.Exec("INSERT INTO database1234.linebotsticker VALUES (?, ?, ?, ?, ?)", info[0].MID, info[0].DisplayName, sticker.PackageID, sticker.ID, sticker.Version)
 			db.Close()
-		}
+		}*/
 	}
 }
