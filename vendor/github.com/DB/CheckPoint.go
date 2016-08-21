@@ -6,7 +6,7 @@ import (
 )
 //numarray 每個數的數量  numarray[0] 為 2
 //colorarray 每個花色的數量 colorarray[0] 為 梅花
-func CalculatePoint (NumArray [13]int,ColorArray [4]int) [6]int{
+func CalculatePoint (ColorArray [4]int,NumArray [13]int) [6]int{
 	var PlayerPoint [6]int
 	Straight := 0
 	for i := 0; i < 4; i++ {
@@ -80,7 +80,7 @@ func CalculatePoint (NumArray [13]int,ColorArray [4]int) [6]int{
 	}
 	return PlayerPoint
 }
-func checkwinner(Player1 [6]int,Player2 [6]int,Player3 [6]int,Player4 [6]int,Player5 [6]int,Player6 [6]int,Player7 [6]int,Player8 [6]int,Player9 [6]int) int{
+func checkwinner(Player1 [6]int,Player2 [6]int,Player3 [6]int,Player4 [6]int,Player5 [6]int,Player6 [6]int,Player7 [6]int,Player8 [6]int,Player9 [6]int,Player10 [6]int) int{
 	var players [11][7]int
 	for i := 0; i < 6; i++ {
 		players[1][i]=Player2[i]	
