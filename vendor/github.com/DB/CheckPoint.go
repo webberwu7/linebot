@@ -110,7 +110,7 @@ func checkwinner(Player1 [6]int,Player2 [6]int,Player3 [6]int,Player4 [6]int,Pla
 		players[9][i]=Player10[i]	
 	}
 	for i := 0; i < 6; i++ {
-		players[0][i]=Player0[i]	
+		players[0][i]=Player1[i]	
 	}
 	var winner int
 	var now1 int
