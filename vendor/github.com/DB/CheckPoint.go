@@ -1,7 +1,5 @@
 package DB
 import (
-	"os"
-	"database/sql"
 	_"github.com/go-sql-driver/mysql"
 )
 //numarray 每個數的數量  numarray[0] 為 2
